@@ -4,13 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 #[Fillable(['user_id', 'currency', 'balance', 'version'])]
 class Wallet extends Model
 {
-    use HasFactory;
-
     /**
      * Get the attributes that should be cast.
      *

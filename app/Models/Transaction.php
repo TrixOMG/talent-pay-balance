@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Enums\TransactionStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 #[Fillable([
     'wallet_id',
@@ -20,8 +19,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 ])]
 class Transaction extends Model
 {
-    use HasFactory;
-
     /**
      * Get the attributes that should be cast.
      *

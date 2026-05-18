@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Enums\DepositStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use function in_array;
 
@@ -20,8 +19,6 @@ use function in_array;
 ])]
 class DepositRequest extends Model
 {
-    use HasFactory;
-
     /**
      * Get the attributes that should be cast.
      *

@@ -19,6 +19,7 @@ docker compose exec app php artisan db:seed --class=TestBalanceSeeder
 далее можно переходить и тестировать:
 
 **http://localhost:8080/admin/login**
+
 **http://localhost:8080/client/login**
 
 ---

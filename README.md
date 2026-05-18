@@ -10,7 +10,16 @@ git clone https://github.com/TrixOMG/talent-pay-balance.git
 cd talent-pay-balance/
 
 docker compose up -d --build
+
+docker compose exec app php artisan migrate
+
+docker compose exec app php artisan db:seed --class=TestBalanceSeeder
 ```
+
+далее можно переходить и тестировать:
+
+**http://localhost:8080/admin/login**
+**http://localhost:8080/client/login**
 
 ---
 

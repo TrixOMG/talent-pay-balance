@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TransactionType;
 use App\Enums\TransactionStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -31,6 +32,7 @@ class Transaction extends Model
             'balance_before' => 'decimal:2',
             'balance_after' => 'decimal:2',
             'metadata' => 'array',
+            'type' => TransactionType::class,
         ];
     }
 

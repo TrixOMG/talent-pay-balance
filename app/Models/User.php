@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -42,11 +40,11 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role === UserRole::ADMIN;
     }
 
     public function isClient(): bool
     {
-        return $this->role === 'client';
+        return $this->role === UserRole::CLIENT;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Enums\UserRole;
+use App\Http\Middleware\CheckRole;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -26,8 +28,9 @@ class ClientPanelProvider extends PanelProvider
         return $panel
             ->id('client')
             ->path('client')
+            ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Blue,
             ])
             ->discoverResources(in: app_path('Filament/Client/Resources'), for: 'App\Filament\Client\Resources')
             ->discoverPages(in: app_path('Filament/Client/Pages'), for: 'App\Filament\Client\Pages')
@@ -52,6 +55,7 @@ class ClientPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                CheckRole::class . ':' . (string)UserRole::CLIENT->value,
             ]);
     }
 }

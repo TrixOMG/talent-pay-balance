@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\DepositStatus;
 use App\Enums\TransactionStatus;
+use App\Enums\TransactionType;
 use App\Models\DepositRequest;
 use App\Models\Transaction;
 use App\Models\User;
@@ -122,7 +123,7 @@ class WalletService
 
             return Transaction::create([
                 'wallet_id' => $lockedWallet->id,
-                'type' => 'withdrawal',
+                'type' => TransactionType::WITHDRAWAL,
                 'amount' => -$amount,
                 'balance_before' => $balanceBefore,
                 'balance_after' => $balanceAfter,
@@ -138,7 +139,7 @@ class WalletService
 
     public function refund(Transaction $originalTransaction, User $admin): Transaction
     {
-        if ($originalTransaction->type !== 'withdrawal') {
+        if ($originalTransaction->type !== TransactionType::WITHDRAWAL) {
             throw new InvalidArgumentException('Возврат возможен только для операций списания');
         }
 

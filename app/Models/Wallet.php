@@ -36,7 +36,7 @@ class Wallet extends Model
         return $this->hasMany(DepositRequest::class);
     }
 
-    public static function getOrCreate(User $user, string $currency = 'USD'): self
+    public static function getOrCreate(User $user, string $currency = 'RUB'): self
     {
         return static::firstOrCreate(
             [
@@ -48,12 +48,5 @@ class Wallet extends Model
                 'version' => 1,
             ]
         );
-    }
-
-    public function lockForUpdate(): self
-    {
-        return static::where('id', $this->id)
-            ->lockForUpdate()
-            ->firstOrFail();
     }
 }

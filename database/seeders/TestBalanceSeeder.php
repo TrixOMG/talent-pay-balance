@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Enums\DepositStatus;
 use App\Enums\TransactionStatus;
+use App\Enums\TransactionType;
+use App\Enums\UserRole;
 use App\Models\DepositRequest;
 use App\Models\Transaction;
 use App\Models\User;
@@ -21,13 +23,13 @@ class TestBalanceSeeder extends Seeder
             'email' => 'client@example.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'role' => 'client',
+            'role' => UserRole::CLIENT,
             'remember_token' => Str::random(10),
         ]);
 
         $wallet = Wallet::create([
             'user_id' => $client->id,
-            'currency' => 'USD',
+            'currency' => 'RUB',
             'balance' => 1000.00,
             'version' => 1,
         ]);
@@ -37,13 +39,13 @@ class TestBalanceSeeder extends Seeder
             'email' => 'admin@example.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'role' => 'admin',
+            'role' => UserRole::ADMIN,
             'remember_token' => Str::random(10),
         ]);
 
         Transaction::create([
             'wallet_id' => $wallet->id,
-            'type' => 'deposit',
+            'type' => TransactionType::DEPOSIT,
             'amount' => 1000.00,
             'balance_before' => 0,
             'balance_after' => 1000.00,
@@ -58,7 +60,7 @@ class TestBalanceSeeder extends Seeder
 
         $withdrawalTransaction = Transaction::create([
             'wallet_id' => $wallet->id,
-            'type' => 'withdrawal',
+            'type' => TransactionType::WITHDRAWAL,
             'amount' => -500.00,
             'balance_before' => 1000.00,
             'balance_after' => 500.00,
@@ -73,7 +75,7 @@ class TestBalanceSeeder extends Seeder
 
         Transaction::create([
             'wallet_id' => $wallet->id,
-            'type' => 'refund',
+            'type' => TransactionType::REFUND,
             'amount' => 500.00,
             'balance_before' => 500.00,
             'balance_after' => 1000.00,
@@ -92,7 +94,7 @@ class TestBalanceSeeder extends Seeder
 
         Transaction::create([
             'wallet_id' => $wallet->id,
-            'type' => 'withdrawal',
+            'type' => TransactionType::WITHDRAWAL,
             'amount' => -200.00,
             'balance_before' => 1000.00,
             'balance_after' => 800.00,
@@ -118,7 +120,7 @@ class TestBalanceSeeder extends Seeder
             'wallet_id' => $wallet->id,
             'user_id' => $client->id,
             'amount' => 1000.00,
-            'status' => 'pending',
+            'status' => DepositStatus::PENDING,
             'comment' => 'Пополнение на крупный проект',
             'created_at' => now()->subMinutes(30),
         ]);

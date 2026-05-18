@@ -8,6 +8,7 @@ use App\Models\DepositRequest;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Wallet;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,10 +17,12 @@ class TestBalanceSeeder extends Seeder
     public function run(): void
     {
         $client = User::create([
-            'name' => 'Иван Петров (Клиент)',
+            'name' => 'Иван Клиентов',
             'email' => 'client@example.com',
+            'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'role' => 'client',
+            'remember_token' => Str::random(10),
         ]);
 
         $wallet = Wallet::create([
@@ -32,8 +35,10 @@ class TestBalanceSeeder extends Seeder
         $admin = User::create([
             'name' => 'Админ Админов',
             'email' => 'admin@example.com',
+            'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'role' => 'admin',
+            'remember_token' => Str::random(10),
         ]);
 
         Transaction::create([
@@ -135,6 +140,6 @@ class TestBalanceSeeder extends Seeder
         echo "- Демонстрация возврата\n";
         echo "- Активные запросы на пополнение\n";
         echo "---\n";
-        echo "Текущий баланс: {$currentBalance} USD\n";
+        echo "Текущий баланс: {$currentBalance} RUB\n";
     }
 }
